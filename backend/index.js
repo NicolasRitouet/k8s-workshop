@@ -11,12 +11,12 @@ app.use(koaBody({multipart: true}))
 app.use(cors())
   .use(ctx => {
     if (ctx.request.method == 'POST') {
-      console.log(ctx.request);
       const { sentence } = ctx.request.body;
-      console.log(sentence);
       if (!sentence) ctx.throw(400, 'sentence required');
+      console.log(sentence);
       ctx.body = sentiment.analyze(sentence);
     }
 });
 
 app.listen(3001);
+console.log(`Running on http://localhost:3001`);
