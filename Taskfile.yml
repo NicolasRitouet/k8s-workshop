@@ -1,0 +1,25 @@
+version: '2'
+
+tasks:
+  build:
+    cmds:
+      - docker build -t nicolasritouet/sentiment-frontend frontend
+      - docker build -t nicolasritouet/sentiment-backend backend
+  run:
+    cmds:
+      - docker run -d -p 80:80 --name sentiment-frontend nicolasritouet/sentiment-frontend
+      - docker run -d -p 3001:3001 --name sentiment-backend nicolasritouet/sentiment-backend
+  cleanup:
+    cmds:
+      - docker stop sentiment-frontend
+      - docker rm sentiment-frontend
+      - docker stop sentiment-backend
+      - docker rm sentiment-backend
+  test:
+    cmds:
+      - curl http://localhost
+      - curl http://localhost:3001
+  logs:
+    cmds:
+      - docker logs sentiment-frontend
+      - docker logs sentiment-backend
