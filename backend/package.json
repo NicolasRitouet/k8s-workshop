@@ -1,0 +1,21 @@
+{
+  "name": "sentiment-api",
+  "version": "1.0.0",
+  "description": "API to analyze sentiment of a particular sentence",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/cors": "^2.2.1",
+    "koa": "^2.5.1",
+    "koa-body": "^4.0.4",
+    "sentiment": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
