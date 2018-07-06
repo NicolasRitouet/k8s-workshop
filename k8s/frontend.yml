@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: sentiment-frontend
-        image: nicolasritouet/sentiment-frontend
+        image: nicolasritouet/sentiment-frontend:latest
         ports:
         - containerPort: 80
