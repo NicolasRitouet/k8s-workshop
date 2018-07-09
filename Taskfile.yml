@@ -37,3 +37,7 @@ tasks:
     cmds:
       - kubectl expose deployment sentiment-backend --type=LoadBalancer
       - kubectl expose deployment sentiment-frontend-lb --type=LoadBalancer
+  update-containers:
+    cmds:
+      - kubectl patch deployment sentiment-backend -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+      - kubectl patch deployment sentiment-frontend -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"

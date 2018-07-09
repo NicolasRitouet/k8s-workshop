@@ -18,7 +18,7 @@ app.use(cors())
       sentence.hostname = os.hostname();
       ctx.body = sentiment.analyze(sentence);
     } else {
-      ctx.body = os.hostname();
+      ctx.body = `you've hit ${ os.hostname() }`;
     }
 });
 
