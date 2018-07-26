@@ -30,13 +30,13 @@ tasks:
   deploy:
     cmds:
       - kubectl apply -f k8s/frontend.yml --record
-      - kubectl apply -f k8s/frontend-lb.yml --record
+      # - kubectl apply -f k8s/frontend-lb.yml --record
       - kubectl apply -f k8s/backend.yml --record
-      - kubectl apply -f k8s/backend-lb.yml --record
+      # - kubectl apply -f k8s/backend-lb.yml --record
   local:
     cmds:
       - kubectl expose deployment sentiment-backend --type=LoadBalancer
-      - kubectl expose deployment sentiment-frontend-lb --type=LoadBalancer
+      - kubectl expose deployment sentiment-frontend --type=LoadBalancer
   update-containers:
     cmds:
       - kubectl patch deployment sentiment-backend -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"

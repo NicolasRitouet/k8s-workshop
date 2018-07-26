@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: sentiment-backend
-        image: nicolasritouet/sentiment-backend
+        image: nicolasritouet/sentiment-backend:latest
         ports:
         - containerPort: 3001
