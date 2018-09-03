@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: sentiment-backend
   labels:
-    app: backend
+    app: sentiment-backend
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: backend
+      app: sentiment-backend
   template:
     metadata:
       labels:
-        app: backend
+        app: sentiment-backend
     spec:
       containers:
       - name: sentiment-backend

@@ -11,7 +11,8 @@ const app = new Koa();
 app.use(koaBody({multipart: true}))
 app.use(cors())
   .use(ctx => {
-    if (ctx.request.method == 'POST') {
+    console.log(`Hit ${ ctx.request.href } on ${ os.hostname() }`);
+    if (ctx.request.method === 'POST') {
       const { sentence } = ctx.request.body;
       if (!sentence) ctx.throw(400, `sentence required (${os.hostname()}`);
       console.log(sentence);
