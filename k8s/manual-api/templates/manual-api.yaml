@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: manual-api
+  namespace: mycs-api
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: manual-api
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - image: mycs/manual-api:{{ .Values.environment }}
+          imagePullPolicy: Always
+          name: manual-api
+          ports:
+            - containerPort: 5000
+          env:
+            - name: GO_ENV
+              value: {{ .Values.environment }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: manual-api
+  namespace: mycs-api
+spec:
+  ports:
+    - port: 80
+      targetPort: 5000
+      protocol: TCP
+  selector:
+    app: manual-api
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: manual-api
+  namespace: mycs-api
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: subnet-072986e842f02703a,subnet-080b46bb277b463ea,subnet-0c939aa53fa08c9da
+    alb.ingress.kubernetes.io/tags: Environment={{ .Values.environment }},Team={{ .Values.team }}
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:335580229851:certificate/6c84a7f8-cbd8-4fac-b7a3-727e5e6d72a4
+spec:
+  rules:
+    - host: api.mycs.blue
+      http:
+        paths:
+          - path: /manual-api
+            backend:
+              serviceName: manual-api
+              servicePort: 80

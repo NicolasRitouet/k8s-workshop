@@ -1,0 +1,7 @@
+# Default values for manual-api.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 2
+environment: dev
+team: unicorn
