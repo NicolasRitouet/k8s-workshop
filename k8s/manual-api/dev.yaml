@@ -1,0 +1,10 @@
+# Dev values for manual-api.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# helm install -f manual-api/values.yaml -f manual-api/dev.yaml manual-api --debug --dry-run
+
+environment: dev
+subnets: subnet-072986e842f02703a,subnet-080b46bb277b463ea,subnet-0c939aa53fa08c9da # as csv
+domain: mycs.blue
+certificateArn: arn:aws:acm:us-east-1:335580229851:certificate/6c84a7f8-cbd8-4fac-b7a3-727e5e6d72a4

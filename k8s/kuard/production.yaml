@@ -1,0 +1,10 @@
+# Production values for manual-api.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# helm install -f kuard/values.yaml -f kuard/production.yaml kuard --debug --dry-run
+
+environment: production
+subnets: # as csv
+domain: 
+certificateArn:

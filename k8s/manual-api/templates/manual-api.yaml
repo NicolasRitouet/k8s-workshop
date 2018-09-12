@@ -44,13 +44,13 @@ metadata:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/subnets: subnet-072986e842f02703a,subnet-080b46bb277b463ea,subnet-0c939aa53fa08c9da
+    alb.ingress.kubernetes.io/subnets: {{ .Values.subnets }}
     alb.ingress.kubernetes.io/tags: Environment={{ .Values.environment }},Team={{ .Values.team }}
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:335580229851:certificate/6c84a7f8-cbd8-4fac-b7a3-727e5e6d72a4
+    alb.ingress.kubernetes.io/certificate-arn: {{ .Values.certificateArn }}
 spec:
   rules:
-    - host: api.mycs.blue
+    - host: api.{{ .Values.domain }}
       http:
         paths:
           - path: /manual-api
