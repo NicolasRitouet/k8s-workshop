@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: alb-ingress
+  namespace: mycs-api
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: {{ .Values.subnets }}
+    alb.ingress.kubernetes.io/tags: Environment={{ .Values.environment }},Team={{ .Values.team }}
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: {{ .Values.certificateArn }}
+spec:
+  rules:
+    - host: api.{{ .Values.domain }}
+      http:
+        paths:
+          - path: /manual-api
+            backend:
+              serviceName: manual-api
+              servicePort: 80
+    - host: kuard.{{ .Values.domain }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: kuard
+              servicePort: 80
