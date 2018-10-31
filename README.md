@@ -20,10 +20,3 @@
 🏃‍♂️ `task run`: Run both containers
 🗑 `task cleanup`: Stop and remove both containers
 📝 `task logs`: Display logs for both containers
-
-
-
-## Tips
-
-1. Access a pod locally: `kubectl port-forward <POD_NAME> 3001:3001`
-2. 
